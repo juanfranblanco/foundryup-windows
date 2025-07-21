@@ -93,6 +93,80 @@ After completing all prerequisites:
    foundryup
    ```
 
+## foundryup Commands and Options
+
+### Basic Usage
+```bash
+foundryup [OPTIONS]
+```
+
+### Options
+
+| Option | Description | Example |
+|--------|-------------|---------|
+| `-h, --help` | Display help message | `foundryup -h` |
+| `-v VERSION` | Install a specific version | `foundryup -v 0.2.0` |
+| `--version` | Show currently installed versions | `foundryup --version` |
+| `-b, --branch` | Install from a specific branch | `foundryup -b master` |
+| `-P, --pr` | Install from a specific Pull Request | `foundryup -P 1234` |
+| `-C, --commit` | Install from a specific commit | `foundryup -C abc123` |
+| `-r, --repo` | Install from a custom repository | `foundryup -r https://github.com/user/foundry` |
+| `-p, --path` | Install to a custom path | `foundryup -p C:\custom\path` |
+| `-L, --local` | Install from local repository | `foundryup -L C:\dev\foundry` |
+
+### Common Usage Examples
+
+#### Install/Update to Latest Version
+```bash
+foundryup
+```
+
+#### Install Nightly Version
+```bash
+foundryup -v nightly
+```
+
+#### Install Specific Version
+```bash
+foundryup -v 0.2.0
+```
+
+#### Install from Master Branch
+```bash
+foundryup -b master
+```
+
+#### Install from a Pull Request
+```bash
+foundryup -P 1234
+```
+
+#### Install from a Specific Commit
+```bash
+foundryup -C abc123def456
+```
+
+#### Install from Custom Repository
+```bash
+foundryup -r https://github.com/myuser/foundry-fork
+```
+
+#### Install from Custom Repository with Branch
+```bash
+foundryup -r https://github.com/myuser/foundry-fork -b develop
+```
+
+#### Check Installed Versions
+```bash
+foundryup --version
+```
+
+This will display versions for:
+- forge
+- cast
+- anvil
+- chisel
+
 ## Verifying Installation
 
 After running `foundryup`, verify the installation:
@@ -105,10 +179,28 @@ chisel --version
 
 ## Troubleshooting
 
+### Common Issues
+
 - **"cargo not found"**: Ensure Rust is installed and `%USERPROFILE%\.cargo\bin` is in your PATH
 - **"cmake not found"**: Ensure CMake path is added to your PATH (see step 4 above)
 - **Linking errors**: Verify Visual Studio Build Tools are installed with C++ components
 - **"foundryup not recognized"**: Ensure your foundryup folder is in PATH and you've restarted your terminal
+- **Build failures**: Try installing from a stable version instead of nightly: `foundryup -v 0.2.0`
+- **Permission errors**: Run terminal as Administrator when installing
+
+### Advanced Troubleshooting
+
+#### Reset Installation
+If you encounter persistent issues, try a clean installation:
+1. Delete the Foundry binaries from `%USERPROFILE%\.cargo\bin`:
+   - `forge.exe`
+   - `cast.exe`
+   - `anvil.exe`
+   - `chisel.exe`
+2. Run `foundryup` again
+
+#### Verbose Output
+For debugging installation issues, you can run cargo with verbose output by modifying the batch file temporarily to add `--verbose` flag to cargo commands.
 
 ## Dependencies Summary
 
@@ -117,4 +209,11 @@ chisel --version
 - **CMake**: Included with VS Build Tools (must be added to PATH manually)
 - **Git**: For downloading dependencies (usually pre-installed on Windows 10/11)
 
-Enjoy using Foundry!
+## Additional Resources
+
+- [Foundry Book](https://book.getfoundry.sh/)
+- [Foundry GitHub Repository](https://github.com/foundry-rs/foundry)
+- [Rust Installation Guide](https://www.rust-lang.org/tools/install)
+- [Visual Studio Build Tools](https://visualstudio.microsoft.com/downloads/#build-tools-for-visual-studio-2022)
+
+Enjoy using Foundry on Windows!
